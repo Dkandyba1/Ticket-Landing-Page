@@ -1,1618 +1,504 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Enterprise-grade IT ticketing systems and web portals. Transform support operations with custom-built solutions designed for scale, security, and efficiency.">
-    <meta name="keywords" content="IT ticketing system, helpdesk software, support portal, ticket management, custom web portals, business automation, enterprise software">
-    <title>Enterprise IT Ticketing Systems & Web Portals | TicketFlow Pro</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --color-primary: #0f172a;
-            --color-primary-light: #1e293b;
-            --color-accent: #3b82f6;
-            --color-accent-light: #60a5fa;
-            --color-accent-dark: #2563eb;
-            --color-success: #10b981;
-            --color-warning: #f59e0b;
-            --color-text: #1e293b;
-            --color-text-muted: #64748b;
-            --color-text-light: #94a3b8;
-            --color-bg: #ffffff;
-            --color-bg-alt: #f8fafc;
-            --color-bg-dark: #f1f5f9;
-            --color-border: #e2e8f0;
-            --color-border-light: #f1f5f9;
-            
-            --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-            --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-            
-            --radius-sm: 0.375rem;
-            --radius-md: 0.5rem;
-            --radius-lg: 0.75rem;
-            --radius-xl: 1rem;
-            --radius-2xl: 1.5rem;
-            
-            --spacing-section: 8rem;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            color: var(--color-text);
-            line-height: 1.7;
-            background: var(--color-bg);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* Typography */
-        h1, h2, h3, h4, h5, h6 {
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            line-height: 1.2;
-        }
-
-        h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
-        h2 { font-size: clamp(2rem, 4vw, 3rem); }
-        h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
-
-        /* Header & Navigation */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--color-border-light);
-            z-index: 1000;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .header.scrolled {
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .nav-container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 1.25rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--color-primary);
-            letter-spacing: -0.03em;
-        }
-
-        .logo-icon {
-            width: 2.5rem;
-            height: 2.5rem;
-            background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
-            border-radius: var(--radius-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 900;
-            font-size: 1.25rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--color-text-muted);
-            font-weight: 500;
-            font-size: 0.9375rem;
-            transition: color 0.2s;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--color-accent);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -0.25rem;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--color-accent);
-            transform: scaleX(0);
-            transition: transform 0.2s;
-        }
-
-        .nav-links a:hover::after {
-            transform: scaleX(1);
-        }
-
-        .btn {
-            padding: 0.75rem 1.75rem;
-            border-radius: var(--radius-lg);
-            font-weight: 600;
-            font-size: 0.9375rem;
-            cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            border: none;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary {
-            background: var(--color-accent);
-            color: white;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .btn-primary:hover {
-            background: var(--color-accent-dark);
-            box-shadow: var(--shadow-md);
-            transform: translateY(-1px);
-        }
-
-        .btn-secondary {
-            background: var(--color-bg);
-            color: var(--color-text);
-            border: 1px solid var(--color-border);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--color-accent);
-            color: var(--color-accent);
-        }
-
-        .btn-lg {
-            padding: 1rem 2rem;
-            font-size: 1rem;
-        }
-
-        /* Hero Section */
-        .hero {
-            margin-top: 5rem;
-            padding: 8rem 2rem 6rem;
-            background: linear-gradient(180deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 70%;
-            height: 120%;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .hero-container {
-            max-width: 1280px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-content {
-            max-width: 48rem;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: white;
-            border: 1px solid var(--color-border);
-            border-radius: 2rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--color-text-muted);
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow-xs);
-        }
-
-        .hero-badge-dot {
-            width: 0.5rem;
-            height: 0.5rem;
-            background: var(--color-success);
-            border-radius: 50%;
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        .hero h1 {
-            margin-bottom: 1.5rem;
-            color: var(--color-primary);
-        }
-
-        .hero h1 .gradient-text {
-            background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-description {
-            font-size: 1.25rem;
-            color: var(--color-text-muted);
-            margin-bottom: 3rem;
-            line-height: 1.7;
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 4rem;
-        }
-
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            padding: 3rem;
-            background: white;
-            border-radius: var(--radius-2xl);
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--color-border-light);
-        }
-
-        .stat {
-            text-align: center;
-            padding: 1rem;
-        }
-
-        .stat-value {
-            display: block;
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--color-primary);
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.03em;
-        }
-
-        .stat-label {
-            font-size: 0.875rem;
-            color: var(--color-text-muted);
-            font-weight: 500;
-        }
-
-        .stat-divider {
-            width: 1px;
-            background: var(--color-border);
-        }
-
-        /* Logo Cloud */
-        .logo-cloud {
-            padding: 4rem 2rem;
-            background: var(--color-bg);
-            border-top: 1px solid var(--color-border-light);
-            border-bottom: 1px solid var(--color-border-light);
-        }
-
-        .logo-cloud-container {
-            max-width: 1280px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .logo-cloud-title {
-            font-size: 0.875rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--color-text-light);
-            margin-bottom: 2rem;
-        }
-
-        .logo-cloud-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 3rem;
-            align-items: center;
-            opacity: 0.4;
-            filter: grayscale(1);
-        }
-
-        .logo-placeholder {
-            height: 2.5rem;
-            background: var(--color-text-light);
-            border-radius: var(--radius-md);
-            opacity: 0.3;
-        }
-
-        /* Section */
-        .section {
-            padding: var(--spacing-section) 2rem;
-        }
-
-        .section-alt {
-            background: var(--color-bg-alt);
-        }
-
-        .section-container {
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            max-width: 48rem;
-            margin: 0 auto 4rem;
-        }
-
-        .section-label {
-            display: inline-block;
-            padding: 0.375rem 0.875rem;
-            background: var(--color-accent);
-            color: white;
-            border-radius: 2rem;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 1rem;
-        }
-
-        .section-header h2 {
-            margin-bottom: 1rem;
-            color: var(--color-primary);
-        }
-
-        .section-header p {
-            font-size: 1.125rem;
-            color: var(--color-text-muted);
-        }
-
-        /* Features Grid */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .feature-card {
-            padding: 2.5rem;
-            background: white;
-            border: 1px solid var(--color-border-light);
-            border-radius: var(--radius-xl);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
-            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-xl);
-            border-color: var(--color-border);
-        }
-
-        .feature-card:hover::before {
-            opacity: 1;
-        }
-
-        .feature-icon {
-            width: 3.5rem;
-            height: 3.5rem;
-            background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
-            border-radius: var(--radius-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.75rem;
-        }
-
-        .feature-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
-            color: var(--color-primary);
-            font-weight: 700;
-        }
-
-        .feature-card p {
-            color: var(--color-text-muted);
-            line-height: 1.7;
-            font-size: 0.9375rem;
-        }
-
-        /* Screenshot Section */
-        .screenshot-section {
-            background: var(--color-primary);
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .screenshot-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, transparent 100%);
-            pointer-events: none;
-        }
-
-        .screenshot-container {
-            position: relative;
-            z-index: 1;
-        }
-
-        .screenshot-content {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .screenshot-content h2 {
-            color: white;
-            margin-bottom: 1rem;
-        }
-
-        .screenshot-content p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.125rem;
-        }
-
-        .screenshot-image {
-            border-radius: var(--radius-2xl);
-            overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .screenshot-image img {
-            width: 100%;
-            display: block;
-        }
-
-        /* Process Steps */
-        .process-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 3rem;
-            position: relative;
-        }
-
-        .process-connector {
-            position: absolute;
-            top: 2.5rem;
-            left: 12.5%;
-            right: 12.5%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--color-border), transparent);
-        }
-
-        .process-step {
-            position: relative;
-            text-align: center;
-        }
-
-        .step-number {
-            width: 5rem;
-            height: 5rem;
-            margin: 0 auto 1.5rem;
-            background: white;
-            border: 3px solid var(--color-accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--color-accent);
-            position: relative;
-            z-index: 1;
-        }
-
-        .process-step h3 {
-            font-size: 1.125rem;
-            margin-bottom: 0.75rem;
-            color: var(--color-primary);
-            font-weight: 700;
-        }
-
-        .process-step p {
-            color: var(--color-text-muted);
-            font-size: 0.9375rem;
-        }
-
-        /* Testimonials */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .testimonial-card {
-            padding: 2.5rem;
-            background: white;
-            border: 1px solid var(--color-border-light);
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s;
-        }
-
-        .testimonial-card:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-2px);
-        }
-
-        .stars {
-            display: flex;
-            gap: 0.25rem;
-            margin-bottom: 1.5rem;
-            align-items: center;
-        }
-
-        .star {
-            display: flex;
-            align-items: center;
-        }
-
-        .testimonial-text {
-            color: var(--color-text);
-            line-height: 1.7;
-            margin-bottom: 2rem;
-            font-size: 0.9375rem;
-        }
-
-        .testimonial-author {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .author-avatar {
-            width: 3rem;
-            height: 3rem;
-            background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 1.125rem;
-        }
-
-        .author-name {
-            font-weight: 700;
-            color: var(--color-primary);
-            margin-bottom: 0.125rem;
-        }
-
-        .author-role {
-            font-size: 0.875rem;
-            color: var(--color-text-muted);
-        }
-
-        /* FAQ */
-        .faq-container {
-            max-width: 56rem;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            margin-bottom: 1rem;
-            background: white;
-            border: 1px solid var(--color-border-light);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            transition: all 0.3s;
-        }
-
-        .faq-item:hover {
-            border-color: var(--color-border);
-        }
-
-        .faq-question {
-            padding: 1.5rem 2rem;
-            font-size: 1.0625rem;
-            font-weight: 600;
-            color: var(--color-primary);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.2s;
-        }
-
-        .faq-icon {
-            width: 1.5rem;
-            height: 1.5rem;
-            background: var(--color-bg-alt);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
-            transition: all 0.3s;
-            color: var(--color-text-muted);
-        }
-
-        .faq-item.active .faq-icon {
-            background: var(--color-accent);
-            color: white;
-            transform: rotate(45deg);
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 30rem;
-        }
-
-        .faq-answer-content {
-            padding: 0 2rem 1.5rem 2rem;
-            color: var(--color-text-muted);
-            line-height: 1.7;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 80%;
-            height: 150%;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .cta-container {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            max-width: 48rem;
-            margin: 0 auto;
-        }
-
-        .cta-container h2 {
-            color: white;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta-container p {
-            font-size: 1.25rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 3rem;
-        }
-
-        .contact-form {
-            background: white;
-            padding: 3rem;
-            border-radius: var(--radius-2xl);
-            box-shadow: var(--shadow-2xl);
-            text-align: left;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--color-text);
-            font-size: 0.9375rem;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.875rem 1rem;
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-md);
-            font-size: 0.9375rem;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.2s;
-            color: var(--color-text);
-            background: var(--color-bg);
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--color-accent);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 8rem;
-        }
-
-        .required {
-            color: #ef4444;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 1rem;
-            background: var(--color-accent);
-            color: white;
-            border: none;
-            border-radius: var(--radius-lg);
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .submit-btn:hover:not(:disabled) {
-            background: var(--color-accent-dark);
-            box-shadow: var(--shadow-md);
-            transform: translateY(-1px);
-        }
-
-        .submit-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .form-message {
-            margin-top: 1rem;
-            padding: 1rem;
-            border-radius: var(--radius-md);
-            text-align: center;
-            font-weight: 500;
-            font-size: 0.9375rem;
-        }
-
-        .form-message.success {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--color-success);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-        }
-
-        .form-message.error {
-            background: rgba(239, 68, 68, 0.1);
-            color: #ef4444;
-            border: 1px solid rgba(239, 68, 68, 0.2);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--color-primary);
-            color: white;
-            padding: 5rem 2rem 2rem;
-        }
-
-        .footer-container {
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 4rem;
-            margin-bottom: 4rem;
-        }
-
-        .footer-brand h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .footer-brand p {
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-links h4 {
-            font-size: 0.9375rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.75rem;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            transition: color 0.2s;
-            font-size: 0.9375rem;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        .footer-bottom {
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.875rem;
-        }
-
-        .footer-social {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-link {
-            width: 2.5rem;
-            height: 2.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-
-        .social-link:hover {
-            background: var(--color-accent);
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--color-text);
-            cursor: pointer;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            :root {
-                --spacing-section: 5rem;
-            }
-
-            .features-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .process-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .process-connector {
-                display: none;
-            }
-
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 3rem;
-            }
-
-            .logo-cloud-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .hero {
-                padding: 5rem 1.5rem 4rem;
-            }
-
-            .hero-stats {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.5rem;
-                padding: 2rem;
-            }
-
-            .stat-divider {
-                display: none;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .process-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-form {
-                padding: 2rem 1.5rem;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-
-            .section {
-                padding: 4rem 1.5rem;
-            }
-
-            .logo-cloud-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(2rem);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in {
-            animation: fadeInUp 0.6s ease-out;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Genius IT Solutions – Business IT Support York, Leeds & Yorkshire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#F0F4F8;
+  --bg-mid:#E4ECF4;
+  --bg-card:#FFFFFF;
+  --navy:#1A2E45;
+  --navy-soft:#2C4A6E;
+  --accent:#0077B6;
+  --accent-light:#0096C7;
+  --mint:#00B894;
+  --text:#1A2E45;
+  --text-mid:#3D5A7A;
+  --text-muted:#6B8BAE;
+  --border:rgba(0,119,182,0.12);
+  --border-strong:rgba(0,119,182,0.25);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2.5rem;display:flex;align-items:center;justify-content:space-between;background:rgba(240,244,248,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.logo{font-family:'Inter',sans-serif;font-weight:800;font-size:1.35rem;color:var(--navy);letter-spacing:-0.02em}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--text-muted);font-size:0.82rem;font-weight:500;transition:color 0.2s;letter-spacing:0.04em;text-transform:uppercase}
+.nav-links a:hover{color:var(--navy)}
+.nav-cta{background:var(--accent);color:#fff;padding:0.55rem 1.4rem;border-radius:6px;font-weight:600;font-size:0.82rem;text-decoration:none;letter-spacing:0.02em;transition:all 0.2s}
+.nav-cta:hover{background:var(--accent-light);transform:translateY(-1px)}
+
+.hero{min-height:100vh;display:flex;align-items:center;padding:7rem 2.5rem 4rem;position:relative;overflow:hidden;background:linear-gradient(160deg,#E8F1FA 0%,#F0F4F8 60%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,119,182,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,119,182,0.06) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+.hero-glow{position:absolute;top:-10%;right:-5%;width:700px;height:700px;background:radial-gradient(circle,rgba(0,150,199,0.1) 0%,transparent 70%);pointer-events:none}
+.hero-content{max-width:780px;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:0.6rem;background:rgba(0,119,182,0.08);border:1px solid rgba(0,119,182,0.2);border-radius:4px;padding:0.4rem 1rem;font-size:0.72rem;font-weight:600;color:var(--accent);margin-bottom:1.75rem;letter-spacing:0.08em;text-transform:uppercase}
+.pulse{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.25}}
+h1{font-family:'Inter',sans-serif;font-size:clamp(2.6rem,5vw,4.2rem);font-weight:800;line-height:1.08;letter-spacing:-0.03em;margin-bottom:1.5rem;color:var(--navy)}
+h1 em{font-style:normal;color:var(--accent)}
+.hero-sub{font-size:1.05rem;color:var(--text-mid);line-height:1.75;max-width:560px;margin-bottom:2.5rem;font-weight:400}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+.btn-primary{background:var(--accent);color:#fff;padding:0.85rem 2rem;border-radius:6px;font-weight:600;font-size:0.9rem;text-decoration:none;display:inline-block;transition:all 0.2s;letter-spacing:0.01em}
+.btn-primary:hover{background:var(--accent-light);transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,119,182,0.2)}
+.btn-ghost{color:var(--navy);padding:0.85rem 2rem;border-radius:6px;font-weight:500;font-size:0.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;border:1px solid rgba(26,46,69,0.2);transition:all 0.2s}
+.btn-ghost:hover{border-color:rgba(26,46,69,0.4);background:rgba(26,46,69,0.05)}
+.hero-stats{display:flex;gap:3.5rem;margin-top:4rem;padding-top:2.5rem;border-top:1px solid rgba(26,46,69,0.1)}
+.stat-num{font-family:'Inter',sans-serif;font-size:2.1rem;font-weight:800;color:var(--navy);letter-spacing:-0.03em}
+.stat-num span{color:var(--accent)}
+.stat-label{font-size:0.75rem;color:var(--text-muted);margin-top:0.2rem;letter-spacing:0.02em}
+
+.trust-strip{background:var(--bg-mid);padding:1.6rem 2.5rem;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.trust-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;justify-content:center}
+.trust-label{font-size:0.68rem;color:var(--text-muted);letter-spacing:0.1em;font-weight:600;white-space:nowrap;text-transform:uppercase}
+.trust-badges{display:flex;gap:1.25rem;flex-wrap:wrap;align-items:center}
+.trust-badge{background:#fff;border:1px solid var(--border);border-radius:4px;padding:0.38rem 0.9rem;font-size:0.75rem;font-weight:500;color:var(--text-mid)}
+
+section{padding:6rem 2.5rem}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-tag{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;color:var(--accent);text-transform:uppercase;margin-bottom:0.85rem}
+h2{font-family:'Inter',sans-serif;font-size:clamp(2rem,3.5vw,2.75rem);font-weight:800;letter-spacing:-0.03em;line-height:1.15;margin-bottom:1rem;color:var(--navy)}
+.section-intro{color:var(--text-mid);font-size:1rem;line-height:1.75;max-width:540px}
+
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.25rem;margin-top:3.5rem}
+.service-card{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:2rem;transition:all 0.25s;position:relative;overflow:hidden}
+.service-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--mint));opacity:0;transition:opacity 0.25s}
+.service-card:hover{border-color:var(--border-strong);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,119,182,0.1)}
+.service-card:hover::after{opacity:1}
+.service-icon{width:44px;height:44px;border-radius:8px;background:rgba(0,119,182,0.08);border:1px solid rgba(0,119,182,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem}
+.service-icon svg{width:22px;height:22px;stroke:var(--accent);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.service-card h3{font-size:1rem;font-weight:700;margin-bottom:0.55rem;letter-spacing:-0.02em;color:var(--navy)}
+.service-card p{font-size:0.85rem;color:var(--text-muted);line-height:1.68}
+.service-tag{display:inline-block;margin-top:1.2rem;font-size:0.68rem;font-weight:700;letter-spacing:0.08em;color:var(--accent);background:rgba(0,119,182,0.07);border:1px solid rgba(0,119,182,0.15);border-radius:3px;padding:0.18rem 0.55rem;text-transform:uppercase}
+
+.why-section{background:var(--bg-mid)}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;align-items:center;margin-top:3rem}
+@media(max-width:700px){.why-grid{grid-template-columns:1fr}}
+.why-visual{background:#fff;border:1px solid var(--border);border-radius:14px;padding:2.5rem}
+.cert-row{display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.cert-chip{background:rgba(0,184,148,0.08);border:1px solid rgba(0,184,148,0.2);border-radius:4px;padding:0.45rem 0.9rem;font-size:0.78rem;font-weight:600;color:#00916E}
+.stat-box{background:rgba(0,119,182,0.05);border:1px solid rgba(0,119,182,0.12);border-radius:8px;padding:1.25rem 1.5rem;margin-bottom:0.85rem}
+.stat-box:last-child{margin-bottom:0}
+.stat-box .lbl{font-size:0.68rem;color:var(--text-muted);letter-spacing:0.1em;font-weight:600;margin-bottom:0.3rem;text-transform:uppercase}
+.stat-box .val{font-family:'Inter',sans-serif;font-size:1.9rem;font-weight:800;color:var(--accent);letter-spacing:-0.03em}
+.stat-box .sub{font-size:0.75rem;color:var(--text-muted);margin-top:0.15rem}
+.why-points{display:flex;flex-direction:column;gap:1.75rem}
+.why-point{display:flex;gap:1rem;align-items:flex-start}
+.why-icon{width:34px;height:34px;border-radius:7px;background:rgba(0,184,148,0.08);border:1px solid rgba(0,184,148,0.18);flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:0.1rem}
+.why-icon svg{width:17px;height:17px;stroke:var(--mint);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.why-point h4{font-size:0.95rem;font-weight:700;margin-bottom:0.35rem;color:var(--navy);letter-spacing:-0.01em}
+.why-point p{font-size:0.84rem;color:var(--text-mid);line-height:1.65}
+
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-top:3.5rem}
+.price-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:2rem;position:relative}
+.price-card.featured{border-color:var(--accent);border-width:2px}
+.featured-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:0.65rem;font-weight:700;padding:0.28rem 1rem;border-radius:0 0 6px 6px;letter-spacing:0.1em;text-transform:uppercase;white-space:nowrap}
+.price-name{font-size:1rem;font-weight:700;margin-bottom:0.3rem;color:var(--navy)}
+.price-desc{font-size:0.8rem;color:var(--text-muted);margin-bottom:1.75rem}
+.price-amount{font-family:'Inter',sans-serif;font-size:2.4rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:0.2rem;color:var(--navy)}
+.price-per{font-size:0.75rem;color:var(--text-muted);margin-bottom:1.75rem}
+.price-divider{height:1px;background:var(--border);margin-bottom:1.5rem}
+.price-features{display:flex;flex-direction:column;gap:0.7rem;margin-bottom:2rem}
+.price-feature{display:flex;align-items:center;gap:0.6rem;font-size:0.84rem;color:var(--text-mid)}
+.btn-card{width:100%;padding:0.78rem;border-radius:6px;border:1px solid rgba(26,46,69,0.18);background:transparent;color:var(--navy);font-family:'Inter',sans-serif;font-weight:600;font-size:0.85rem;cursor:pointer;transition:all 0.2s}
+.btn-card:hover{background:rgba(26,46,69,0.05);border-color:rgba(26,46,69,0.3)}
+.btn-card.primary-btn{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn-card.primary-btn:hover{background:var(--accent-light)}
+
+.cta-section{background:var(--navy);border-top:1px solid rgba(255,255,255,0.05)}
+.cta-inner{max-width:680px;margin:0 auto;text-align:center;padding:6rem 2rem}
+.cta-inner .section-tag{color:rgba(255,255,255,0.5)}
+.cta-inner h2{font-size:clamp(1.9rem,4vw,2.9rem);color:#fff}
+.cta-inner p{color:rgba(255,255,255,0.6);margin:1.25rem 0 2.5rem;font-size:1rem;line-height:1.75}
+.cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.cta-meta{margin-top:1.5rem;font-size:0.75rem;color:rgba(255,255,255,0.4);letter-spacing:0.03em}
+.btn-ghost-light{color:#fff;padding:0.85rem 2rem;border-radius:6px;font-weight:500;font-size:0.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;border:1px solid rgba(255,255,255,0.25);transition:all 0.2s}
+.btn-ghost-light:hover{border-color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.07)}
+
+footer{padding:3rem 2.5rem 2rem;background:var(--navy);border-top:1px solid rgba(255,255,255,0.08)}
+.footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem}
+@media(max-width:700px){.footer-inner{grid-template-columns:1fr 1fr}}
+.footer-brand p{font-size:0.82rem;color:rgba(255,255,255,0.45);margin-top:0.75rem;line-height:1.7;max-width:260px}
+.footer-col h5{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;margin-bottom:1rem;color:rgba(255,255,255,0.9);text-transform:uppercase}
+.footer-col a{display:block;font-size:0.82rem;color:rgba(255,255,255,0.45);text-decoration:none;margin-bottom:0.5rem;transition:color 0.2s}
+.footer-col a:hover{color:#fff}
+.footer-bottom{max-width:1100px;margin:2.5rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;color:rgba(255,255,255,0.35);flex-wrap:wrap;gap:1rem}
+.footer-bottom a{color:rgba(255,255,255,0.35);text-decoration:none}
+.footer-bottom a:hover{color:#fff}
+.phone-big{font-family:'Inter',sans-serif;font-size:1.5rem;font-weight:800;color:#60B8E0;text-decoration:none;display:block;margin-top:0.6rem;letter-spacing:-0.02em}
+.logo-footer{font-family:'Inter',sans-serif;font-weight:800;font-size:1.35rem;color:#fff;letter-spacing:-0.02em}
+.logo-footer span{color:#60B8E0}
+</style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header" id="header">
-        <div class="nav-container">
-            <div class="logo">
-                <div class="logo-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v2z"/><path d="M12 12h.01"/><path d="M16 12h.01"/><path d="M8 12h.01"/></svg>
-                </div>
-                TicketFlow Pro
-            </div>
-            <nav class="nav-links">
-                <a href="#features">Features</a>
-                <a href="#process">Process</a>
-                <a href="#testimonials">Clients</a>
-                <a href="#faq">FAQ</a>
-                <a href="#contact" class="btn btn-primary">Get Started</a>
-            </nav>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            </button>
+
+<nav>
+  <div class="logo">Genius<span>.</span>IT</div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#pricing">Packages</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="tel:03300884757" class="nav-cta">0330 088 4757</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="pulse"></span>
+      ISO 27001 Certified &nbsp;·&nbsp; Trusted Managed Service Provider
+    </div>
+    <h1>IT Support Built for<br><em>Growing Businesses</em></h1>
+    <p class="hero-sub">Genius IT Solutions keeps your business secure, connected, and running at full speed — from York and Leeds to nationwide. No jargon. No drama. Just reliable technology that works.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Get a Free Consultation</a>
+      <a href="#services" class="btn-ghost">Explore Services
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">2<span>hr</span></div>
+        <div class="stat-label">Average Response Time</div>
+      </div>
+      <div>
+        <div class="stat-num">ISO<span> ✓</span></div>
+        <div class="stat-label">27001 Certified</div>
+      </div>
+      <div>
+        <div class="stat-num">3<span>+</span></div>
+        <div class="stat-label">UK Hubs: York · Leeds · Midlands</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="trust-inner">
+    <span class="trust-label">Trusted Partners</span>
+    <div class="trust-badges">
+      <span class="trust-badge">Microsoft 365</span>
+      <span class="trust-badge">Azure Cloud</span>
+      <span class="trust-badge">SharePoint</span>
+      <span class="trust-badge">Acronis Backup</span>
+      <span class="trust-badge">Avast Business</span>
+      <span class="trust-badge">VoIP / Teams</span>
+    </div>
+  </div>
+</div>
+
+<section id="services">
+  <div class="section-inner">
+    <p class="section-tag">What We Do</p>
+    <h2>Services That Keep<br>Your Business Moving</h2>
+    <p class="section-intro">From day-to-day helpdesk support to full cloud migrations, we cover every layer of your IT stack — so you can focus on running your business.</p>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
-    </header>
+        <h3>Managed IT Support</h3>
+        <p>Proactive monitoring, rapid remote and on-site response. Your dedicated IT team — without the overhead of hiring in-house.</p>
+        <span class="service-tag">Most Popular</span>
+      </div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-container">
-            <div class="hero-content fade-in">
-                <div class="hero-badge">
-                    <span class="hero-badge-dot"></span>
-                    Trusted by 500+ businesses worldwide
-                </div>
-                <h1>
-                    <span class="gradient-text">Enterprise-grade</span> IT ticketing systems built for your business
-                </h1>
-                <p class="hero-description">
-                    Transform support operations with custom-built solutions designed for scale, security, and efficiency. No generic software. No compromises.
-                </p>
-                <div class="hero-cta">
-                    <a href="#contact" class="btn btn-primary btn-lg">Schedule a Demo →</a>
-                    <a href="#features" class="btn btn-secondary btn-lg">Explore Features</a>
-                </div>
-                <div class="hero-stats">
-                    <div class="stat">
-                        <span class="stat-value">500+</span>
-                        <span class="stat-label">Enterprise Clients</span>
-                    </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat">
-                        <span class="stat-value">2M+</span>
-                        <span class="stat-label">Tickets Processed</span>
-                    </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat">
-                        <span class="stat-value">99.9%</span>
-                        <span class="stat-label">Uptime SLA</span>
-                    </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat">
-                        <span class="stat-value">24/7</span>
-                        <span class="stat-label">Expert Support</span>
-                    </div>
-                </div>
-            </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
         </div>
-    </section>
+        <h3>Microsoft 365 & Azure</h3>
+        <p>Full deployment, migration, and ongoing management of Microsoft 365, SharePoint, OneDrive, and Azure cloud infrastructure.</p>
+        <span class="service-tag">Specialist</span>
+      </div>
 
-    <!-- Logo Cloud -->
-    <section class="logo-cloud">
-        <div class="logo-cloud-container">
-            <p class="logo-cloud-title">Trusted by industry leaders</p>
-            <div class="logo-cloud-grid">
-                <div class="logo-placeholder"></div>
-                <div class="logo-placeholder"></div>
-                <div class="logo-placeholder"></div>
-                <div class="logo-placeholder"></div>
-                <div class="logo-placeholder"></div>
-            </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
         </div>
-    </section>
+        <h3>Cyber Security & ISO 27001</h3>
+        <p>Cyber Essentials compliance, threat monitoring, and ISO 27001 guidance to protect your data and reputation.</p>
+        <span class="service-tag">Certified</span>
+      </div>
 
-    <!-- Features Section -->
-    <section class="section" id="features">
-        <div class="section-container">
-            <div class="section-header">
-                <span class="section-label">Features</span>
-                <h2>Everything you need to deliver exceptional support</h2>
-                <p>Enterprise features that scale with your business, without the enterprise complexity</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="18" y="3" width="4" height="18"/><rect x="10" y="8" width="4" height="13"/><rect x="2" y="13" width="4" height="8"/></svg>
-                    </div>
-                    <h3>Real-Time Analytics</h3>
-                    <p>Monitor performance metrics, track SLAs, and identify trends with comprehensive dashboards and reporting tools.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v2z"/><path d="M13 5v2M13 17v2M13 11v2"/></svg>
-                    </div>
-                    <h3>Intelligent Ticketing</h3>
-                    <p>Automated routing, priority management, and smart categorization ensure tickets reach the right team instantly.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                    </div>
-                    <h3>Workflow Automation</h3>
-                    <p>Build custom workflows, automate repetitive tasks, and integrate with your existing tools seamlessly.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                    </div>
-                    <h3>Smart Notifications</h3>
-                    <p>Keep teams aligned with intelligent email alerts, Slack integration, and customizable notification rules.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-                    </div>
-                    <h3>Advanced Reporting</h3>
-                    <p>Generate detailed reports on team performance, resolution times, and customer satisfaction metrics.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                    </div>
-                    <h3>Customer Portals</h3>
-                    <p>White-labeled self-service portals where customers can submit tickets, track progress, and access resources.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                    </div>
-                    <h3>Billing Integration</h3>
-                    <p>Track billable time, generate invoices, and integrate with QuickBooks or your accounting software.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                    </div>
-                    <h3>Enterprise Security</h3>
-                    <p>Role-based access control, audit logs, SSO integration, and compliance-ready security features.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-                    </div>
-                    <h3>Mobile-First Design</h3>
-                    <p>Fully responsive interface works flawlessly on any device, with dedicated mobile apps available.</p>
-                </div>
-            </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         </div>
-    </section>
+        <h3>Backup & Disaster Recovery</h3>
+        <p>Automated cloud backup with Acronis and robust recovery planning — because losing data is never an option.</p>
+        <span class="service-tag">Critical</span>
+      </div>
 
-    <!-- Screenshot Section -->
-    <section class="section screenshot-section">
-        <div class="section-container screenshot-container">
-            <div class="screenshot-content">
-                <h2>Built for teams that demand excellence</h2>
-                <p>Intuitive interface designed for productivity, powered by enterprise-grade technology</p>
-            </div>
-            <div class="screenshot-image">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 700'%3E%3Crect fill='%23f1f5f9' width='1200' height='700'/%3E%3Crect fill='%23fff' x='40' y='80' width='1120' height='540' rx='16'/%3E%3Crect fill='%230f172a' x='40' y='80' width='280' height='540'/%3E%3Crect fill='%233b82f6' x='60' y='100' width='240' height='48' rx='8'/%3E%3Crect fill='%231e293b' x='60' y='168' width='240' height='40' rx='6'/%3E%3Crect fill='%231e293b' x='60' y='220' width='240' height='40' rx='6'/%3E%3Crect fill='%231e293b' x='60' y='272' width='240' height='40' rx='6'/%3E%3Crect fill='%23f8fafc' x='360' y='120' width='760' height='140' rx='12'/%3E%3Crect fill='%23dbeafe' x='380' y='140' width='220' height='100' rx='8'/%3E%3Crect fill='%23dbeafe' x='620' y='140' width='220' height='100' rx='8'/%3E%3Crect fill='%23dbeafe' x='860' y='140' width='220' height='100' rx='8'/%3E%3Crect fill='%23fff' x='360' y='280' width='760' height='320' rx='12'/%3E%3Crect fill='%23e2e8f0' x='380' y='300' width='720' height='40' rx='6'/%3E%3Crect fill='%23e2e8f0' x='380' y='360' width='720' height='40' rx='6'/%3E%3Crect fill='%23e2e8f0' x='380' y='420' width='720' height='40' rx='6'/%3E%3Crect fill='%23e2e8f0' x='380' y='480' width='720' height='40' rx='6'/%3E%3Crect fill='%233b82f6' x='950' y='540' width='150' height='40' rx='8'/%3E%3C/svg%3E" alt="Dashboard Screenshot">
-            </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.6a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.6a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 17v-.08z"/></svg>
         </div>
-    </section>
+        <h3>Cloud VoIP Phone Systems</h3>
+        <p>Modern, flexible business phone systems that work from anywhere. Reduce costs and improve collaboration across your team.</p>
+        <span class="service-tag">Cloud-Based</span>
+      </div>
 
-    <!-- Process Section -->
-    <section class="section section-alt" id="process">
-        <div class="section-container">
-            <div class="section-header">
-                <span class="section-label">Process</span>
-                <h2>From consultation to launch in 4 weeks</h2>
-                <p>A streamlined approach that gets you up and running fast</p>
-            </div>
-            <div class="process-grid">
-                <div class="process-connector"></div>
-                <div class="process-step">
-                    <div class="step-number">1</div>
-                    <h3>Discovery & Planning</h3>
-                    <p>We analyze your requirements, workflows, and pain points to design the perfect solution.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">2</div>
-                    <h3>Custom Development</h3>
-                    <p>Our team builds your system with your branding, features, and integrations.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">3</div>
-                    <h3>Training & Testing</h3>
-                    <p>Comprehensive training for your team and thorough testing to ensure everything works perfectly.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">4</div>
-                    <h3>Launch & Support</h3>
-                    <p>Go live with confidence, backed by our dedicated support team and ongoing maintenance.</p>
-                </div>
-            </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         </div>
-    </section>
+        <h3>Network & Infrastructure</h3>
+        <p>Hardware procurement, network design, server management, and on-site engineering for businesses of all sizes.</p>
+        <span class="service-tag">On-Site</span>
+      </div>
 
-    <!-- Testimonials -->
-    <section class="section" id="testimonials">
-        <div class="section-container">
-            <div class="section-header">
-                <span class="section-label">Testimonials</span>
-                <h2>Trusted by businesses across industries</h2>
-                <p>See how we've transformed support operations for companies like yours</p>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="stars">
-                        <span class="star"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
-                        <span class="star"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
-                        <span class="star"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
-                        <span class="star"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
-                        <span class="star"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
-                    </div>
-                    <p class="testimonial-text">"The custom ticketing system has completely transformed how we handle client support. Response times dropped by 65% and our customer satisfaction scores are at an all-time high. The ROI was clear within the first quarter."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">SM</div>
-                        <div>
-                            <div class="author-name">Sarah Mitchell</div>
-                            <div class="author-role">Director of Operations, TechCorp Solutions</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">
-                        <span class="star"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
-                        <span class="star"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
-                        <span class="star"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
-                        <span class="star"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
-                        <span class="star"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
-                    </div>
-                    <p class="testimonial-text">"Unlike generic software, this system was built specifically for our workflow. The automation features alone save us 20+ hours every week. Best decision we made for our operations team this year."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">JC</div>
-                        <div>
-                            <div class="author-name">James Chen</div>
-                            <div class="author-role">CEO, Digital Innovations Ltd</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">
-                        <span class="star"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
-                        <span class="star"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
-                        <span class="star"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
-                        <span class="star"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
-                        <span class="star"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
-                    </div>
-                    <p class="testimonial-text">"The implementation was seamless and the training was excellent. Our team adapted quickly and the reporting features give us insights we never had before. The support team is incredibly responsive."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">EP</div>
-                        <div>
-                            <div class="author-name">Emily Parker</div>
-                            <div class="author-role">IT Director, HealthFirst Medical</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    </div>
+  </div>
+</section>
+
+<section id="why" class="why-section">
+  <div class="section-inner">
+    <p class="section-tag">Why Genius</p>
+    <h2>More Than a Help Desk</h2>
+    <div class="why-grid">
+      <div class="why-points">
+
+        <div class="why-point">
+          <div class="why-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <h4>ISO 27001 Certified</h4>
+            <p>We hold full ISO 27001 accreditation — proof that your data is handled to the highest international security standards, every single day.</p>
+          </div>
         </div>
-    </section>
 
-    <!-- FAQ -->
-    <section class="section section-alt" id="faq">
-        <div class="section-container">
-            <div class="section-header">
-                <span class="section-label">FAQ</span>
-                <h2>Frequently asked questions</h2>
-                <p>Everything you need to know about our custom ticketing systems</p>
-            </div>
-            <div class="faq-container">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>How long does implementation take?</span>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Most projects are completed within 4-6 weeks from initial consultation to launch. The timeline depends on your specific requirements, integrations, and customization needs. We provide a detailed project plan during discovery with clear milestones and deliverables.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>What does a custom system cost?</span>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Investment varies based on features, complexity, and integrations. Standard implementations start at £5,500, while enterprise solutions with advanced automation and custom integrations range from £12,000-£25,000. We offer flexible payment plans and provide detailed quotes after understanding your specific needs.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Do you provide hosting and ongoing support?</span>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Yes. We offer fully managed hosting with 99.9% uptime SLA, automatic backups, security updates, and 24/7 monitoring. Support packages start at £250/month and include priority assistance, bug fixes, performance optimization, and feature enhancements.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Can you integrate with our existing tools?</span>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Absolutely. We integrate with popular platforms including Slack, Microsoft Teams, QuickBooks, Salesforce, Stripe, and most CRM/ERP systems. We also provide REST API access for custom integrations with any platform or internal system you use.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>What if we need changes after launch?</span>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            We build systems designed to evolve with your business. Minor updates and bug fixes are included in your support plan. For new features or major enhancements, we offer hourly rates (£95/hour) or project-based pricing. Your system grows as your needs change.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Do we own the code and data?</span>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Yes, complete ownership. Once the project is complete and paid in full, you receive full rights to the source code, database, and all intellectual property. You can self-host or transfer to any provider. There's no vendor lock-in, and you maintain complete control over your data.
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="why-point">
+          <div class="why-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a7.5 7.5 0 0 1 13 0"/></svg>
+          </div>
+          <div>
+            <h4>Boots on the Ground</h4>
+            <p>Our engineers work inside retail stores, server rooms, and offices across the UK. When you need a physical presence, we are there.</p>
+          </div>
         </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section class="section cta-section" id="contact">
-        <div class="section-container cta-container">
-            <h2>Ready to transform your support operations?</h2>
-            <p>Get a free consultation and custom proposal for your business</p>
-            <form class="contact-form" id="contactForm">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="firstName">First Name <span class="required">*</span></label>
-                        <input type="text" id="firstName" name="firstName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastName">Last Name <span class="required">*</span></label>
-                        <input type="text" id="lastName" name="lastName" required>
-                    </div>
-                </div>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="email">Work Email <span class="required">*</span></label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone Number <span class="required">*</span></label>
-                        <input type="tel" id="phone" name="phone" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="company">Company Name</label>
-                    <input type="text" id="company" name="company">
-                </div>
-                <div class="form-group">
-                    <label for="services">What are you looking for? <span class="required">*</span></label>
-                    <select id="services" name="services" required>
-                        <option value="">Select your primary need...</option>
-                        <option value="full-ticketing">Complete Ticketing System</option>
-                        <option value="customer-portal">Customer Self-Service Portal</option>
-                        <option value="automation">Workflow Automation & Integration</option>
-                        <option value="migration">Migration from Existing System</option>
-                        <option value="consulting">Consultation & Requirements Analysis</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="message">Tell us about your requirements</label>
-                    <textarea id="message" name="message" placeholder="Describe your current challenges, team size, and what success looks like for you..."></textarea>
-                </div>
-                <button type="submit" class="submit-btn" id="submitBtn">Request Consultation</button>
-                <div id="formMessage" class="form-message" style="display: none;"></div>
-            </form>
+        <div class="why-point">
+          <div class="why-icon">
+            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div>
+            <h4>Enterprise Partners, SME Focus</h4>
+            <p>Rock-solid partnerships with Microsoft, Acronis, and other leading vendors — bringing enterprise-grade tools to growing businesses.</p>
+          </div>
         </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <h3>TicketFlow Pro</h3>
-                    <p>Enterprise-grade IT ticketing systems and web portals built for businesses that demand excellence, security, and scalability.</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Product</h4>
-                    <ul>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#process">How It Works</a></li>
-                        <li><a href="#testimonials">Case Studies</a></li>
-                        <li><a href="#faq">Pricing</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="#contact">About</a></li>
-                        <li><a href="#contact">Careers</a></li>
-                        <li><a href="#contact">Partners</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="#contact">Privacy Policy</a></li>
-                        <li><a href="#contact">Terms of Service</a></li>
-                        <li><a href="#contact">Security</a></li>
-                        <li><a href="#contact">GDPR</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 TicketFlow Pro. All rights reserved.</p>
-                <div class="footer-social">
-                    <a href="#" class="social-link" aria-label="LinkedIn">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                    </a>
-                    <a href="#" class="social-link" aria-label="X / Twitter">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                    </a>
-                    <a href="#" class="social-link" aria-label="Facebook">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-                    </a>
-                </div>
-            </div>
+        <div class="why-point">
+          <div class="why-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div>
+            <h4>No Jargon Guarantee</h4>
+            <p>We translate technology into plain English. You will always know what we are doing, why we are doing it, and what it means for your business.</p>
+          </div>
         </div>
-    </footer>
 
-    <script>
-        // Header scroll effect
-        const header = document.getElementById('header');
-        let lastScroll = 0;
+      </div>
+      <div class="why-visual">
+        <div class="cert-row">
+          <span class="cert-chip">ISO 27001 Certified</span>
+          <span class="cert-chip">Cyber Essentials</span>
+        </div>
+        <div class="stat-box">
+          <div class="lbl">Average Response Time</div>
+          <div class="val">2 Hours</div>
+          <div class="sub">Remote support &middot; Same-day where possible</div>
+        </div>
+        <div class="stat-box">
+          <div class="lbl">Coverage</div>
+          <div class="val">UK Wide</div>
+          <div class="sub">York &middot; Leeds &middot; The Midlands &middot; Manchester</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            if (currentScroll > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-            lastScroll = currentScroll;
-        });
+<section id="pricing">
+  <div class="section-inner">
+    <p class="section-tag">Transparent Pricing</p>
+    <h2>Straightforward Packages</h2>
+    <p class="section-intro">No hidden fees, no surprise invoices. Choose the package that fits your business today and scale up whenever you are ready.</p>
+    <div class="pricing-grid">
 
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const headerHeight = 80;
-                    const targetPosition = target.offsetTop - headerHeight;
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
+      <div class="price-card">
+        <div class="price-name">Essentials</div>
+        <div class="price-desc">For small teams getting started with managed IT</div>
+        <div class="price-amount">Contact</div>
+        <div class="price-per">us for pricing</div>
+        <div class="price-divider"></div>
+        <div class="price-features">
+          <div class="price-feature">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B894" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Remote helpdesk support
+          </div>
+          <div class="price-feature">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B894" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Antivirus &amp; patch management
+          </div>
+          <div class="price-feature">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B894" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Microsoft 365 management
+          </div>
+          <div class="price-feature">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B894" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Monthly reporting
+          </div>
+          <div class="price-feature" style="opacity:0.35">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            On-site visits
+          </div>
+          <div class="price-feature" style="opacity:0.35">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            ISO 27001 support
+          </div>
+        </div>
+        <button class="btn-card" onclick="window.location.href='tel:03300884757'">Get Started</button>
+      </div>
 
-        // FAQ Accordion
-        document.querySelectorAll('.faq-item').forEach(item => {
-            const question = item.querySelector('.faq-question');
-            question.addEventListener('click', () => {
-                const isActive = item.classList.contains('active');
-                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-                if (!isActive) {
-                    item.classList.add('active');
-                }
-            });
-        });
+      <div class="price-card featured">
+        <div class="featured-badge">Most Popular</div>
+        <div class="price-name">Professional</div>
+        <div class="price-desc">Full managed service for growing businesses</div>
+        <div class="price-amount">Contact</div>
+        <div class="price-per">us for pricing</div>
+        <div class="price-divider"></div>
+        <div class="price-features">
+          <div class="price-feature">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B894" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Everything in Essentials
+          </div>
+          <div class="price-feature">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B894" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            On-site engineer visits
+          </div>
+          <div class="price-feature">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B894" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Acronis cloud backup
+          </div>
+          <div class="price-feature">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B894" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            VoIP phone system
+          </div>
+          <div class="price-feature">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B894" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Azure &amp; SharePoint setup
+          </div>
+          <div class="price-feature" style="opacity:0.35">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            ISO 27001 certification
+          </div>
+        </div>
+        <button class="btn-card primary-btn" onclick="window.location.href='tel:03300884757'">Get Started</button>
+      </div>
 
-        // Contact Form
-        const contactForm = document.getElementById('contactForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const formMessage = document.getElementById('formMessage');
+      <div class="price-card">
+        <div class="price-name">Enterprise</div>
+        <div class="price-desc">Full-service IT partnership with compliance support</div>
+        <div class="price-amount">Custom</div>
+        <div class="price-per">tailored to your requirements</div>
+        <div class="price-divider"></div>
+        <div class="price-features">
+          <div class="price-feature">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B894" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Everything in Professional
+          </div>
+          <div class="price-feature">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B894" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            ISO 27001 compliance support
+          </div>
+          <div class="price-feature">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B894" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Dedicated account manager
+          </div>
+          <div class="price-feature">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B894" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Network &amp; infrastructure design
+          </div>
+          <div class="price-feature">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B894" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Priority SLA response
+          </div>
+          <div class="price-feature">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B894" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Custom integrations &amp; projects
+          </div>
+        </div>
+        <button class="btn-card" onclick="window.location.href='tel:03300884757'">Talk to Us</button>
+      </div>
 
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = new FormData(contactForm);
-            const data = Object.fromEntries(formData);
-            
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
-            
-            try {
-                // Replace with your actual API endpoint
-                await new Promise(resolve => setTimeout(resolve, 1500));
-                
-                formMessage.textContent = 'Thank you! We\'ll contact you within 24 hours to schedule your consultation.';
-                formMessage.className = 'form-message success';
-                formMessage.style.display = 'block';
-                contactForm.reset();
-                
-                console.log('Form data:', data);
-                
-            } catch (error) {
-                formMessage.textContent = 'Something went wrong. Please email us directly or try again.';
-                formMessage.className = 'form-message error';
-                formMessage.style.display = 'block';
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Request Consultation';
-                setTimeout(() => {
-                    formMessage.style.display = 'none';
-                }, 6000);
-            }
-        });
+    </div>
+  </div>
+</section>
 
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
+<div class="cta-section" id="contact">
+  <div class="cta-inner">
+    <p class="section-tag">Get In Touch</p>
+    <h2>Ready to Take IT<br>Off Your Plate?</h2>
+    <p>Whether you need urgent support or want to plan your next technology upgrade, we are ready to help. Call us or request a callback — we respond the same day.</p>
+    <div class="cta-buttons">
+      <a href="tel:03300884757" class="btn-primary">Call 0330 088 4757</a>
+      <a href="https://geniustech.co.uk/contact/" class="btn-ghost-light">Request a Callback
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <p class="cta-meta">Monday – Friday &nbsp;·&nbsp; 09:00 – 17:00 &nbsp;·&nbsp; Remote support available nationwide</p>
+  </div>
+</div>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-footer">Genius<span>.</span>IT</div>
+      <p>Genius IT Solutions (JKR Group Ltd). Registered in England &amp; Wales 12096830.<br>43a Shambles, York YO1 7LX</p>
+      <a href="tel:03300884757" class="phone-big">0330 088 4757</a>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <a href="#">Managed IT Support</a>
+      <a href="#">Microsoft 365</a>
+      <a href="#">Cyber Security</a>
+      <a href="#">Cloud Backup</a>
+      <a href="#">VoIP Phones</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="#">About Us</a>
+      <a href="#">ISO 27001</a>
+      <a href="#">Packages</a>
+      <a href="#">Remote Support</a>
+    </div>
+    <div class="footer-col">
+      <h5>Locations</h5>
+      <a href="#">York</a>
+      <a href="#">Leeds</a>
+      <a href="#">The Midlands</a>
+      <a href="#">Manchester</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Genius IT Solutions. All rights reserved.</span>
+    <span>
+      <a href="#">Privacy Policy</a> &nbsp;&middot;&nbsp; <a href="#">Cookie Policy</a>
+    </span>
+  </div>
+</footer>
 
-        document.querySelectorAll('.feature-card, .process-step, .testimonial-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(2rem)';
-            el.style.transition = 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-            observer.observe(el);
-        });
-
-        // Mobile menu
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        mobileMenuBtn.addEventListener('click', () => {
-            alert('Mobile menu would open here. Implement a slide-out menu or modal for production.');
-        });
-    </script>
 </body>
 </html>
